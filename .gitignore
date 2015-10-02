@@ -1,0 +1,10 @@
+# optimized python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# virtual environment
+/venv/
+
+# editor files
+*.swp

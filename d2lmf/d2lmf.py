@@ -16,8 +16,13 @@ def main():
             description='d2lmf is a suite of tools to help mark assignments '
             'submitted to D2L.')
     subparsers = parser.add_subparsers(help='')
-    extract = subparsers.add_parser('extract', help='')
-    extract.add_argument('input_file', help='The zip file to extract data from.')
-    extract.add_argument('output_folder', help='The folder in which to put extracted data.')
-    extract.set_defaults(func=extract)
+
+    extract_parser = subparsers.add_parser('extract', help='')
+    extract_parser.add_argument('input_file',
+            help='The zip file to extract data from.')
+    extract_parser.add_argument('output_folder',
+            help='The folder in which to put extracted data.')
+    extract_parser.set_defaults(func=extract)
+
     args = parser.parse_args()
+    args.func(args)

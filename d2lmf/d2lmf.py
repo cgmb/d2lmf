@@ -69,8 +69,8 @@ def rename(args):
             except (ParserError,ValueError) as e:
                 print(e)
                 pass
-    # sort by student, then by date
-    sorted(submissions, key=itemgetter(1,2))
+    # sort by student name, then by date
+    submissions.sort(key=itemgetter(1,2), reverse=True)
     for dirname, student_name, timestamp in submissions:
         oldpath = os.path.join(args.input_folder, dirname)
         newpath = os.path.join(args.input_folder, student_name)

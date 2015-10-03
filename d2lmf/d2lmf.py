@@ -1,15 +1,26 @@
 # -*- coding: utf-8 -*-
 
 """d2lmf.d2lmf: provides entry point main()."""
+
 from __future__ import print_function
 import argparse
-from sh import mkdir, unzip
+import os
+import errno
 
 __version__ = "0.0.1"
 
+def makedirs_exist(path):
+    try:
+        os.makedirs(path)
+    except OSError as exception:
+        if exception.errno != errno.EEXIST:
+            raise
+
 def extract(args):
-    mkdir(args.output_folder)
-    unzip(args.input_file, '-d', args.output_folder)
+    import zipfile
+    makedirs_exist(args.output_folder)
+    with zipfile.ZipFile(args.input_file, 'r') as z:
+        z.extractall(args.output_folder)
 
 def main():
     parser = argparse.ArgumentParser(prog='d2lmf',

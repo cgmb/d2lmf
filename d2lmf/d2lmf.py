@@ -67,17 +67,20 @@ def rename(args):
                 shortname = student.replace(' ', '')
                 submissions.append((name, shortname, parsed_timestamp))
             except (ParserError,ValueError) as e:
-                print(e)
-                pass
+                print(e, file=sys.stderr)
     # sort by student name, then by date
     submissions.sort(key=itemgetter(1,2), reverse=True)
     for dirname, student_name, timestamp in submissions:
-        oldpath = os.path.join(args.input_folder, dirname)
-        newpath = os.path.join(args.input_folder, student_name)
-        if os.path.exists(newpath):
-            merge(oldpath, newpath)
-        else:
-            os.rename(oldpath, newpath)
+        try:
+            oldpath = os.path.join(args.input_folder, dirname)
+            newpath = os.path.join(args.input_folder, student_name)
+            if os.path.exists(newpath):
+                merge(oldpath, newpath)
+            else:
+                os.rename(oldpath, newpath)
+        except OSError as e:
+            print(e, file=sys.stderr)
+            print('Failed to merge "%s"' % oldpath, file=sys.stderr)
 
 def extract(args):
     import zipfile

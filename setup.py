@@ -15,7 +15,8 @@ setup(
         'console_scripts': ['d2lmf = d2lmf.d2lmf:main']
         },
     install_requires = (
-        'sh',
+        'pyunpack',
+        'patool',
     ),
     tests_require = ['nose'],
     test_suite = "nose.collector",

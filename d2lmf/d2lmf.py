@@ -82,11 +82,49 @@ def rename(args):
             print(e, file=sys.stderr)
             print('Failed to merge "%s"' % oldpath, file=sys.stderr)
 
+def extract_nested(folder):
+    """
+    Unzip, untar, unrar, or whatever any file found in the student submission.
+    """
+    from pyunpack import Archive, PatoolError
+    from zipfile  import BadZipfile, LargeZipFile
+    for root, dirs, files in os.walk(folder):
+        for f in files:
+            if f.endswith(('.zip', '.rar', '.tar.gz', '.tgz', '.tar.bz2',
+                           '.tar.xz', '.7z', '.tar')):
+                try:
+                    archive = os.path.join(root, f)
+                    print('Extracting archive: "%s"' % archive)
+                    Archive(archive).extractall(root)
+                    os.remove(archive)
+                except (PatoolError,BadZipfile,LargeZipFile,OSError) as e:
+                    print(e, file=sys.stderr)
+                    print('Failed to extract "%s"' % oldpath, file=sys.stderr)
+
+def collapse_empty(folder):
+    import shutil
+    """
+    Collapse empty folders into their parents
+    """
+    for submission in os.listdir(folder):
+        submission_path = os.path.join(folder, submission)
+        if os.path.isdir(submission_path):
+            submitted_files = os.listdir(submission_path)
+            if len(submitted_files) == 1:
+                submitted_file_path = os.path.join(submission_path, submitted_files[0])
+                if os.path.isdir(submitted_file_path):
+                    print('Collapsing directory into parent: "%s"' % submitted_file_path)
+                    for f in os.listdir(submitted_file_path):
+                        f_path = os.path.join(submitted_file_path, f)
+                        shutil.move(f_path, submission_path)
+
 def extract(args):
     import zipfile
     makedirs_exist(args.output_folder)
     with zipfile.ZipFile(args.input_file, 'r') as z:
         z.extractall(args.output_folder)
+    extract_nested(args.output_folder)
+    collapse_empty(args.output_folder)
 
 def main():
     parser = argparse.ArgumentParser(prog='d2lmf',

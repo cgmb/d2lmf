@@ -43,6 +43,7 @@ def merge(src, dest):
     Merges the src folder into the dest folder
     """
     import shutil
+    vprint('Merging "%s" into "%s"' % (src, dest))
     for src_root, dirs, files in os.walk(src):
         dest_root = src_root.replace(src, dest, 1)
         if not os.path.exists(dest_root):
@@ -95,7 +96,7 @@ def extract_nested(folder):
                            '.tar.xz', '.7z', '.tar')):
                 try:
                     archive = os.path.join(root, f)
-                    print('Extracting archive: "%s"' % archive)
+                    vprint('Extracting archive: "%s"' % archive)
                     Archive(archive).extractall(root)
                     os.remove(archive)
                 except (PatoolError,BadZipfile,LargeZipFile,OSError) as e:
@@ -114,7 +115,7 @@ def collapse_empty(folder):
             if len(submitted_files) == 1:
                 submitted_file_path = os.path.join(submission_path, submitted_files[0])
                 if os.path.isdir(submitted_file_path):
-                    print('Collapsing directory into parent: "%s"' % submitted_file_path)
+                    vprint('Collapsing directory into parent: "%s"' % submitted_file_path)
                     for f in os.listdir(submitted_file_path):
                         f_path = os.path.join(submitted_file_path, f)
                         shutil.move(f_path, submission_path)
@@ -127,10 +128,22 @@ def extract(args):
     extract_nested(args.output_folder)
     collapse_empty(args.output_folder)
 
+def setup_vprint(args):
+    """
+    Defines the function vprint, which only prints when --verbose is set
+    """
+    global vprint
+    vprint = print if args.verbose else lambda *a, **k: None
+
 def main():
     parser = argparse.ArgumentParser(prog='d2lmf',
             description='d2lmf is a suite of tools to help mark assignments '
             'submitted to D2L.')
+    parser.add_argument('-v','--verbose',
+            action='store_true',
+            help='Display more information about files being changed.')
+    parser.add_argument('--version', action='version',
+            version='%(prog)s ' + __version__)
     subparsers = parser.add_subparsers(help='')
 
     extract_parser = subparsers.add_parser('extract', help='')
@@ -146,4 +159,5 @@ def main():
     rename_parser.set_defaults(func=rename)
 
     args = parser.parse_args()
+    setup_vprint(args)
     args.func(args)

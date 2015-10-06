@@ -56,12 +56,21 @@ def merge(src, dest):
             shutil.move(src_file, dest_root)
     shutil.rmtree(src)
 
-def rename(args):
+def rename(input_folder):
+    """
+    Rename all child folders, using their complicated D2L-given name to infer
+    the submitter's name. Use the submitter's name to create a short, easy
+    name for a folder to move the data to.
+
+    There may be multiple folders created by the same submitter, as they make
+    one for each submission. We'll merge those together, overwriting files
+    from the oldest with files from the newest whenever there's a conflict.
+    """
     from operator import itemgetter
     from datetime import datetime
     submissions = []
-    for name in os.listdir(args.input_folder):
-        if os.path.isdir(os.path.join(args.input_folder, name)):
+    for name in os.listdir(input_folder):
+        if os.path.isdir(os.path.join(input_folder, name)):
             try:
                 id_num, student, timestamp = parse_submission_dirname(name)
                 parsed_timestamp = datetime.strptime(timestamp,
@@ -74,8 +83,8 @@ def rename(args):
     submissions.sort(key=itemgetter(1,2), reverse=True)
     for dirname, student_name, timestamp in submissions:
         try:
-            oldpath = os.path.join(args.input_folder, dirname)
-            newpath = os.path.join(args.input_folder, student_name)
+            oldpath = os.path.join(input_folder, dirname)
+            newpath = os.path.join(input_folder, student_name)
             if os.path.exists(newpath):
                 merge(oldpath, newpath)
             else:
@@ -125,8 +134,12 @@ def extract(args):
     makedirs_exist(args.output_folder)
     with zipfile.ZipFile(args.input_file, 'r') as z:
         z.extractall(args.output_folder)
-    extract_nested(args.output_folder)
-    collapse_empty(args.output_folder)
+    if args.extract_nested:
+        extract_nested(args.output_folder)
+    if args.collapse:
+        collapse_empty(args.output_folder)
+    if args.merge:
+        rename(args.output_folder)
 
 def setup_vprint(args):
     """
@@ -146,17 +159,26 @@ def main():
             version='%(prog)s ' + __version__)
     subparsers = parser.add_subparsers(help='')
 
-    extract_parser = subparsers.add_parser('extract', help='')
+    extract_parser = subparsers.add_parser('extract',
+            help='Extract student submissions from the D2L zip file and '
+            'optionally process them to be easier to work with.')
     extract_parser.add_argument('input_file',
             help='The zip file to extract data from.')
     extract_parser.add_argument('output_folder',
             help='The folder in which to put extracted data.')
+    extract_parser.add_argument('-x','--extract-nested',
+            action='store_true',
+            help='Uses command-line tools to attempt to extract submitted '
+            'archive files, like zip files, tar files, rar files and 7zip '
+            'files.')
+    extract_parser.add_argument('-c','--collapse',
+            action='store_true',
+            help='Collapse pointless subdirectories whose parent directory '
+            'contains nothing else.')
+    extract_parser.add_argument('-m','--merge',
+            action='store_true',
+            help="Merge all of a student's submissions into a single folder.")
     extract_parser.set_defaults(func=extract)
-
-    rename_parser = subparsers.add_parser('rename', help='')
-    rename_parser.add_argument('input_folder',
-            help='The folder full of student submissions to rename.')
-    rename_parser.set_defaults(func=rename)
 
     args = parser.parse_args()
     setup_vprint(args)

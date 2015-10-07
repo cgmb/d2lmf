@@ -26,12 +26,14 @@ setup(
          'Intended Audience :: Developers',
          'Intended Audience :: Education',
          'Intended Audience :: End Users/Desktop',
+         'Natural Language :: English',
+         'License :: OSI Approved :: MIT License',
          'Operating System :: POSIX',
          'Programming Language :: Python :: 2.7',
          'Programming Language :: Python',
          'Topic :: Education',
     ],
     long_description = """
-d2lmf is a suite of tools to help mark assignments submitted to D2L.
+d2lmf is a command-line tool to help mark assignments submitted to D2L.
 """
 )

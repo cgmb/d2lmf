@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.egg-info/
+/re
+/sys
 
 # virtual environment
 /venv/

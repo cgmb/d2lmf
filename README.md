@@ -20,13 +20,21 @@ sudo apt-get install python-pip
 sudo pip install d2lmf
 ```
 
-### Other
-This software has only been tested with Python 2.7 on Ubuntu 14.04. It is
-likely, however, that it works on other platforms. The
-[Python docs](https://docs.python.org/2.7/installing/index.html) detail
-installing for other platforms.
+### OSX
+```bash
+curl https://bootstrap.pypa.io/get-pip.py > get-pip.py
+sudo python get-pip.py
+sudo pip install d2lmf
+```
+
+### Windows
+Unfortunately, Windows is not currently supported.
+
+## Dependencies
+
+The extraction of rar and 7z archives depends on external tools. If you do not
+have those tools installed, those archives will be skipped.
 
 ## Release Status
-If you note the version number, it's `0.0.1`.
-
-There may be bugs, and the inferface may undergo significant changes between releases.
+Note the version number: `0.0.1`. There may be bugs, and the interface may
+undergo significant changes between releases.

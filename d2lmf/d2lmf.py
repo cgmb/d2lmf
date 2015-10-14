@@ -21,6 +21,19 @@ def makedirs_exist(path):
         if exception.errno != errno.EEXIST:
             raise
 
+def copytree_exist(src, dst):
+    """
+    Copies a directory tree at the given path into the destination directory
+    without raising an error if the destination already exists
+    """
+    for item in os.listdir(src):
+        s = os.path.join(src, item)
+        d = os.path.join(dst, item)
+        if os.path.isdir(s):
+            shutil.copytree(s, d)
+        else:
+            shutil.copy2(s, d)
+
 class ParserError(Exception):
     pass
 
@@ -154,9 +167,12 @@ def clean_junk(folder):
 
 def extract(args):
     import zipfile
-    makedirs_exist(args.output_folder)
-    with zipfile.ZipFile(args.input_file, 'r') as z:
-        z.extractall(args.output_folder)
+    if os.path.isdir(args.input_file):
+        copytree_exist(args.input_file, args.output_folder)
+    else:
+        makedirs_exist(args.output_folder)
+        with zipfile.ZipFile(args.input_file, 'r') as z:
+            z.extractall(args.output_folder)
     if args.extract_nested:
         extract_nested(args.output_folder)
     if args.junk:
@@ -188,7 +204,7 @@ def main():
             help='Extract student submissions from the D2L zip file and '
             'optionally process them to be easier to work with.')
     extract_parser.add_argument('input_file',
-            help='The zip file to extract data from.')
+            help='The zip file or unzipped directory to extract data from.')
     extract_parser.add_argument('output_folder',
             help='The folder in which to put extracted data.')
     extract_parser.add_argument('-x','--extract-nested',

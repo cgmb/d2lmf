@@ -110,7 +110,7 @@ def extract_nested(folder):
                     os.remove(archive)
                 except (PatoolError,BadZipfile,LargeZipFile,OSError) as e:
                     print(e, file=sys.stderr)
-                    print('Failed to extract "%s"' % oldpath, file=sys.stderr)
+                    print('Failed to extract "%s"' % archive, file=sys.stderr)
 
 def collapse_empty(folder):
     import shutil

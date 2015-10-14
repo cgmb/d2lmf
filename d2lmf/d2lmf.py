@@ -167,11 +167,11 @@ def clean_junk(folder):
 
 def extract(args):
     import zipfile
-    if os.path.isdir(args.input_file):
-        copytree_exist(args.input_file, args.output_folder)
+    if os.path.isdir(args.input_path):
+        copytree_exist(args.input_path, args.output_folder)
     else:
         makedirs_exist(args.output_folder)
-        with zipfile.ZipFile(args.input_file, 'r') as z:
+        with zipfile.ZipFile(args.input_path, 'r') as z:
             z.extractall(args.output_folder)
     if args.extract_nested:
         extract_nested(args.output_folder)
@@ -203,7 +203,7 @@ def main():
     extract_parser = subparsers.add_parser('extract',
             help='Extract student submissions from the D2L zip file and '
             'optionally process them to be easier to work with.')
-    extract_parser.add_argument('input_file',
+    extract_parser.add_argument('input_path',
             help='The zip file or unzipped directory to extract data from.')
     extract_parser.add_argument('output_folder',
             help='The folder in which to put extracted data.')
@@ -221,7 +221,7 @@ def main():
             help="Merge all of a student's submissions into a single folder.")
     extract_parser.add_argument('-j','--junk',
             action='store_true',
-            help='Clean up any unneccessary files and folders in the'
+            help='Clean up any unneccessary files and folders in the '
             "submission, like '.DS_Store'.")
     extract_parser.set_defaults(func=extract)
 

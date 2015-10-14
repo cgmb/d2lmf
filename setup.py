@@ -5,7 +5,7 @@ from setuptools import setup
 setup(
     name = 'd2lmf',
     version = '0.0.1',
-    description = 'Tools to help mark assignments downloaded from Desire2Learn.',
+    description = 'A command-line tool to help mark assignments submitted to D2L.',
     license='MIT',
     url='https://github.com/cgmb/d2lmf',
     author = 'Cordell Bloor',
@@ -34,6 +34,6 @@ setup(
          'Topic :: Education',
     ],
     long_description = """
-d2lmf is a command-line tool to help mark assignments submitted to D2L.
+d2lmf is a command-line tool to help mark assignments submitted to D2L (Desire2Learn).
 """
 )

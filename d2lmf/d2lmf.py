@@ -9,7 +9,7 @@ import errno
 import shutil
 import sys
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 def makedirs_exist(path):
     """

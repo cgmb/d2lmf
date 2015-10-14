@@ -35,5 +35,5 @@ The extraction of rar and 7z archives depends on external tools. If you do not
 have those tools installed, those archives will be skipped.
 
 ## Release Status
-Note the version number: `0.0.1`. There may be bugs, and the interface may
+Note the version number: `0.0.2`. There may be bugs, and the interface may
 undergo significant changes between releases.

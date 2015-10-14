@@ -6,6 +6,7 @@ from __future__ import print_function
 import argparse
 import os
 import errno
+import shutil
 import sys
 
 __version__ = "0.0.1"
@@ -42,7 +43,6 @@ def merge(src, dest):
     """
     Merges the src folder into the dest folder
     """
-    import shutil
     vprint('Merging "%s" into "%s"' % (src, dest))
     for src_root, dirs, files in os.walk(src):
         dest_root = src_root.replace(src, dest, 1)
@@ -113,7 +113,6 @@ def extract_nested(folder):
                     print('Failed to extract "%s"' % archive, file=sys.stderr)
 
 def collapse_empty(folder):
-    import shutil
     """
     Collapse empty folders into their parents
     """
@@ -129,6 +128,30 @@ def collapse_empty(folder):
                         f_path = os.path.join(submitted_file_path, f)
                         shutil.move(f_path, submission_path)
 
+def clean_junk(folder):
+    """
+    Deletes useless files from the given directory tree
+    """
+    for root, dirs, files in os.walk(folder):
+        for f in files:
+            if f in ['.DS_Store']:
+                try:
+                    junk = os.path.join(root, f)
+                    vprint('Removing: "%s"' % junk)
+                    os.remove(junk)
+                except OSError as e:
+                    print(e, file=sys.stderr)
+                    print('Failed to remove "%s"' % junk, file=sys.stderr)
+        for d in dirs:
+            if d in ['__MACOSX']:
+                try:
+                    junk = os.path.join(root, d)
+                    vprint('Removing: "%s"' % junk)
+                    shutil.rmtree(junk)
+                except (shutil.Error,OSError) as e:
+                    print(e, file=sys.stderr)
+                    print('Failed to remove "%s"' % junk, file=sys.stderr)
+
 def extract(args):
     import zipfile
     makedirs_exist(args.output_folder)
@@ -136,6 +159,8 @@ def extract(args):
         z.extractall(args.output_folder)
     if args.extract_nested:
         extract_nested(args.output_folder)
+    if args.junk:
+        clean_junk(args.output_folder)
     if args.collapse:
         collapse_empty(args.output_folder)
     if args.merge:
@@ -178,6 +203,10 @@ def main():
     extract_parser.add_argument('-m','--merge',
             action='store_true',
             help="Merge all of a student's submissions into a single folder.")
+    extract_parser.add_argument('-j','--junk',
+            action='store_true',
+            help='Clean up any unneccessary files and folders in the'
+            "submission, like '.DS_Store'.")
     extract_parser.set_defaults(func=extract)
 
     args = parser.parse_args()

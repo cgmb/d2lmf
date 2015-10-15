@@ -14,3 +14,10 @@ def test_parse_submission_dirname_with_hyphen_in_name():
     assert student_id == '928421-33831'
     assert student_name == 'Mary-Kate Olsen'
     assert submission_date == 'Oct 2, 2015 12:22 AM'
+
+def test_parse_submission_dirname_on_windows():
+    student_id, student_name, submission_date = parse_submission_dirname(
+            '942724-37311 - John Jacob Jingleheimer Schmidt - Jan 9, 2012 11_55 AM')
+    assert student_id == '942724-37311'
+    assert student_name == 'John Jacob Jingleheimer Schmidt'
+    assert submission_date == 'Jan 9, 2012 11:55 AM'

@@ -49,7 +49,9 @@ def parse_submission_dirname(dirname):
     id_number = tokens[0]
     # we'll assume the extra hypens are a part of the student's name
     student_name = seperator.join(tokens[1:-1])
-    timestamp = tokens[-1]
+    # ':' is not valid in NTFS filenames, so on Windows the time will have
+    # a '_' where there should be a ':'
+    timestamp = tokens[-1].replace('_',':')
     return (id_number, student_name, timestamp)
 
 def merge(src, dest):

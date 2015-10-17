@@ -4,14 +4,19 @@ A command-line tool to help mark assignments submitted to D2L
 ## How to Use
 A sample command might be:
 ```bash
-d2lmf extract -xcjm "Assignment 1 Download Oct 11, 2015 803 PM.zip" mark/a1/T01
+d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" mark/a1/T01
 ```
 
 This extracts the submissions from the zip folder into the directory
-`mark/a1/T01`. The flags x, c, j and m specify that we want to extract any
+`mark/a1/T01`. The flags x, j, c and m specify that we want to extract any
 zip, rar, tar, or 7z archives that students submitted, delete 'junk' like
-`.DS_Store`, collapse needlessly nested directories, and merge each student's
-submissions (if they made more than one).
+`.DS_Store`, collapse needlessly nested directories, and merge all submitted
+files into a directory for each student.
+
+On Windows, you may need to invoke d2lmf through Python, like so:
+```bash
+python -m d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" mark/a1/T01
+```
 
 ## How to Install
 ### Ubuntu

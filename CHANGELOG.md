@@ -1,3 +1,7 @@
+## [v0.0.3] | 2015-10-17
+- Added Windows support
+- Added Python 3.5 support
+
 ## [v0.0.2] | 2015-10-14
 - Added OSX support
 - Extract command supports removal of junk files with -j, and extracting from
@@ -10,6 +14,7 @@ an already unzipped directory
 - Extract command supports extracting submitted archives with -x, collapsing
 unneccessary directories with -c, and merging submissions with -m
 
+[v0.0.3]: https://github.com/cgmb/d2lmf/compare/v0.0.2...v0.0.3
 [v0.0.2]: https://github.com/cgmb/d2lmf/compare/v0.0.1...v0.0.2
 [v0.0.1]: https://github.com/cgmb/d2lmf/commits/v0.0.1
 [Issue #3]: https://github.com/cgmb/d2lmf/issues/3

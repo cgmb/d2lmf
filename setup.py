@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name = 'd2lmf',
-    version = '0.0.2',
+    version = '0.0.3',
     description = 'A command-line tool to help mark assignments submitted to D2L.',
     license='MIT',
     url='https://github.com/cgmb/d2lmf',

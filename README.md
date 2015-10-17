@@ -47,5 +47,5 @@ have those tools installed, those archives will be skipped.
 On Windows, only zip files may be extracted.
 
 ## Release Status
-Note the version number: `0.0.2`. There may be bugs, and the interface may
+Note the version number: `0.0.3`. There may be bugs, and the interface may
 undergo significant changes between releases.

@@ -28,11 +28,18 @@ sudo pip install d2lmf
 ```
 
 ### Windows
-Unfortunately, Windows is not currently supported.
+First, download and install Python 2.7 from https://www.python.org/downloads/
+
+Then, install d2lmf with the command below:
+```bash
+python -m pip install d2lmf
+```
 
 ## Dependencies
 The extraction of rar and 7z archives depends on external tools. If you do not
 have those tools installed, those archives will be skipped.
+
+On Windows, only zip files may be extracted.
 
 ## Release Status
 Note the version number: `0.0.2`. There may be bugs, and the interface may

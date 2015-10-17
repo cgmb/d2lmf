@@ -113,17 +113,23 @@ def extract_nested(folder):
     Unzip, untar, unrar, or whatever any file found in the student submission.
     """
     from pyunpack import Archive, PatoolError
+    from easyprocess import EasyProcessError
     from zipfile  import BadZipfile, LargeZipFile
+    if os.name == 'nt':
+        supported_suffixes = ('.zip')
+    else:
+        supported_suffixes = ('.zip', '.rar', '.tar.gz', '.tgz', '.tar.bz2',
+                '.tar.xz', '.7z', '.tar')
     for root, dirs, files in os.walk(folder):
         for f in files:
-            if f.endswith(('.zip', '.rar', '.tar.gz', '.tgz', '.tar.bz2',
-                           '.tar.xz', '.7z', '.tar')):
+            if f.endswith(supported_suffixes):
                 try:
                     archive = os.path.join(root, f)
                     vprint('Extracting archive: "%s"' % archive)
                     Archive(archive).extractall(root)
                     os.remove(archive)
-                except (PatoolError,BadZipfile,LargeZipFile,OSError) as e:
+                except (EasyProcessError,PatoolError,
+                        BadZipfile,LargeZipFile,OSError) as e:
                     print(e, file=sys.stderr)
                     print('Failed to extract "%s"' % archive, file=sys.stderr)
 

@@ -27,7 +27,7 @@ setup(
          'Intended Audience :: Education',
          'Intended Audience :: End Users/Desktop',
          'Natural Language :: English',
-         'License :: OSI Approved :: MIT License',
+         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
          'Operating System :: MacOS',
          'Operating System :: POSIX :: Linux',
          'Operating System :: Microsoft :: Windows',

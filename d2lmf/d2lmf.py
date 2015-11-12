@@ -204,6 +204,13 @@ def extract(args):
     if args.merge:
         rename(args.output_folder)
 
+def foreach(args):
+    import subprocess
+    for submission in os.listdir(args.directory):
+        submission_path = os.path.join(args.directory, submission)
+        if os.path.isdir(submission_path):
+            subprocess.call(args.command, cwd=submission_path)
+
 def setup_vprint(args):
     """
     Defines the function vprint, which only prints when --verbose is set
@@ -246,6 +253,15 @@ def main():
             help='Clean up any unneccessary files and folders in the '
             "submission, like '.DS_Store'.")
     extract_parser.set_defaults(func=extract)
+
+    foreach_parser = subparsers.add_parser('foreach',
+            help='Run a given command for each submission, with some context'
+            'information provided in environment variables.')
+    foreach_parser.add_argument('directory',
+            help='The directory that contains student submissions.')
+    foreach_parser.add_argument('command',
+            help='A program to execute for each submission.')
+    foreach_parser.set_defaults(func=foreach)
 
     args = parser.parse_args()
     setup_vprint(args)

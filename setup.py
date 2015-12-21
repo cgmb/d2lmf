@@ -15,7 +15,6 @@ setup(
         'console_scripts': ['d2lmf = d2lmf.d2lmf:main']
         },
     install_requires = (
-        'pyunpack',
         'patool',
     ),
     tests_require = ['nose'],

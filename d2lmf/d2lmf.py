@@ -240,6 +240,10 @@ def main():
             help='Uses command-line tools to attempt to extract submitted '
             'archive files, like zip files, tar files, rar files and 7zip '
             'files.')
+    extract_parser.add_argument('-j','--junk',
+            action='store_true',
+            help='Clean up any unneccessary files and folders in the '
+            "submission, like '.DS_Store'.")
     extract_parser.add_argument('-c','--collapse',
             action='store_true',
             help='Collapse pointless subdirectories whose parent directory '
@@ -247,10 +251,6 @@ def main():
     extract_parser.add_argument('-m','--merge',
             action='store_true',
             help="Merge all of a student's submissions into a single folder.")
-    extract_parser.add_argument('-j','--junk',
-            action='store_true',
-            help='Clean up any unneccessary files and folders in the '
-            "submission, like '.DS_Store'.")
     extract_parser.set_defaults(func=extract)
 
     foreach_parser = subparsers.add_parser('foreach',

@@ -127,7 +127,6 @@ def extract_nested(folder):
     Unzip, untar, unrar, or whatever any file found in the student submission.
     """
     import patoolib
-    from zipfile  import BadZipfile, LargeZipFile
     if os.name == 'nt':
         supported_suffixes = ('.zip')
     else:
@@ -139,10 +138,9 @@ def extract_nested(folder):
                 try:
                     archive = os.path.join(root, f)
                     vprint('Extracting archive: "%s"' % archive)
-                    patoolib.extract_archive(archive, outdir=root)
+                    patoolib.extract_archive(archive, verbosity=-1, outdir=root)
                     os.remove(archive)
-                except (patoolib.util.PatoolError,
-                        BadZipfile,LargeZipFile,OSError) as e:
+                except patoolib.util.PatoolError as e:
                     print(e, file=sys.stderr)
                     print('Failed to extract "%s"' % archive, file=sys.stderr)
 

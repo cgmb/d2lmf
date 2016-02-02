@@ -252,7 +252,7 @@ def main():
     extract_parser.set_defaults(func=extract)
 
     foreach_parser = subparsers.add_parser('foreach',
-            help='Run a given command for each submission, with some context'
+            help='Run a given command for each submission, with some context '
             'information provided in environment variables.')
     foreach_parser.add_argument('directory',
             help='The directory that contains student submissions.')

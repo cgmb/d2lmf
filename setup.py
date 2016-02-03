@@ -97,8 +97,6 @@ Dependencies
 The extraction of rar and 7z archives depends on external tools. If you
 do not have those tools installed, those archives will be skipped.
 
-On Windows, only zip files may be extracted.
-
 Release Status
 --------------
 

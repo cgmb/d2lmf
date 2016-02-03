@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name = 'd2lmf',
-    version = '0.0.3',
+    version = '0.0.4',
     description = 'A command-line tool to help mark assignments submitted to D2L.',
     license='GPLv3+',
     url='https://github.com/cgmb/d2lmf',
@@ -102,7 +102,7 @@ On Windows, only zip files may be extracted.
 Release Status
 --------------
 
-Note the version number: ``0.0.3``. There may be bugs, and the interface
+Note the version number: ``0.0.4``. There may be bugs, and the interface
 may undergo significant changes between releases.
 """
 )

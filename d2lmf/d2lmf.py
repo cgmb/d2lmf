@@ -127,10 +127,7 @@ def extract_nested(folder):
     Unzip, untar, unrar, or whatever any file found in the student submission.
     """
     import patoolib
-    if os.name == 'nt':
-        supported_suffixes = ('.zip')
-    else:
-        supported_suffixes = ('.zip', '.rar', '.tar.gz', '.tgz', '.tar.bz2',
+    supported_suffixes = ('.zip', '.rar', '.tar.gz', '.tgz', '.tar.bz2',
                 '.tar.xz', '.7z', '.tar')
     for root, dirs, files in os.walk(folder):
         for f in files:

@@ -1,21 +1,34 @@
 # d2lmf
 A command-line tool to help mark assignments submitted to D2L
 
+## Motivation
+It's frustrating dealing with the zip files full of assignment submissions
+that you get from D2L.
+
+- Merging all of a student's submissions into a single folder is tedious.
+- Navigating submissions on the command line sucks, because each directory name
+  starts with a long number.
+- Extracting all the zip files, tar archives, and 7z archives that students
+  submit adds a needless extra step to marking.
+
+I've found this tool useful for eliminating those annoyances, and I hope you
+will too.
+
 ## How to Use
-A sample command might be:
+This is the most common command I use:
 ```bash
-d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" mark/a1/T01
+d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
 ```
 
-This extracts the submissions from the zip folder into the directory
-`mark/a1/T01`. The flags x, j, c and m specify that we want to extract any
-zip, rar, tar, or 7z archives that students submitted, delete 'junk' like
-`.DS_Store`, collapse needlessly nested directories, and merge all submitted
-files into a directory for each student.
+This extracts the submissions from the zip folder into the directory `A1/T01`.
+The `-x` specifies that we want to extract any zip, rar, tar, or 7z archives
+that students submitted. The `-j` deletes 'junk' like `.DS_Store`. The `-c`
+collapses needlessly nested directories. Finally, the `-m` merges all submitted
+files into a single directory for each student. Cool!
 
-On Windows, you may need to invoke d2lmf through Python, like so:
+On Windows, you may need to invoke d2lmf as a Python module, like so:
 ```bash
-python -m d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" mark/a1/T01
+python -m d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
 ```
 
 ## How to Install
@@ -45,5 +58,5 @@ The extraction of rar and 7z archives depends on external tools. If you do not
 have those tools installed, those archives will be skipped.
 
 ## Release Status
-Note the version number: `0.0.4`. There may be bugs, and the interface may
-undergo significant changes between releases.
+This software is in beta. There may be bugs, and the interface may undergo
+significant changes between releases.

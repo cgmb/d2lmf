@@ -135,7 +135,8 @@ def extract_nested(folder):
                 try:
                     archive = os.path.join(root, f)
                     vprint('Extracting archive: "%s"' % archive)
-                    patoolib.extract_archive(archive, verbosity=-1, outdir=root)
+                    patoolib.extract_archive(archive, verbosity=-1,
+                            interactive=False, outdir=root)
                     os.remove(archive)
                 except patoolib.util.PatoolError as e:
                     print(e, file=sys.stderr)

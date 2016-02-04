@@ -15,7 +15,7 @@ setup(
         'console_scripts': ['d2lmf = d2lmf.d2lmf:main']
         },
     install_requires = (
-        'patool',
+        'patool>=1.9',
     ),
     tests_require = ['nose'],
     test_suite = "nose.collector",

@@ -61,7 +61,7 @@ def parse_submission_dirname(dirname):
         raise ParserError('Expected hyphen-separated id, name and timestamp'
                 ' in "%s"' % dirname)
     id_number = tokens[0]
-    # we'll assume the extra hypens are a part of the student's name
+    # we'll assume the extra hyphens are a part of the student's name
     student_name = seperator.join(tokens[1:-1])
     # ':' is not valid in NTFS filenames, so on Windows the time will have
     # a '_' where there should be a ':'
@@ -142,9 +142,11 @@ def extract_nested(folder):
                     print(e, file=sys.stderr)
                     print('Failed to extract "%s"' % archive, file=sys.stderr)
 
-def collapse_empty(folder):
+def collapse_lonely(folder):
     """
-    Collapse empty folders into their parents
+    Collapse 'lonely' folders into their parents. These are folders that are
+    needlessly nested. They have no sibling files or folders, so their existence
+    does not separate their from anything.
     """
     for submission in os.listdir(folder):
         submission_path = os.path.join(folder, submission)
@@ -195,7 +197,7 @@ def extract(args):
     if args.junk:
         clean_junk(args.output_folder)
     if args.collapse:
-        collapse_empty(args.output_folder)
+        collapse_lonely(args.output_folder)
     if args.merge:
         rename(args.output_folder)
 
@@ -238,7 +240,7 @@ def main():
             'files.')
     extract_parser.add_argument('-j','--junk',
             action='store_true',
-            help='Clean up any unneccessary files and folders in the '
+            help='Clean up any unnecessary files and folders in the '
             "submission, like '.DS_Store'.")
     extract_parser.add_argument('-c','--collapse',
             action='store_true',

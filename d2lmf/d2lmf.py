@@ -48,6 +48,14 @@ def copytree_exist(src, dst):
         else:
             shutil.copy2(s, d)
 
+def dir_empty_or_nonexistent(folder):
+    try:
+        return len(os.listdir(folder)) == 0
+    except OSError as e:
+        if e.errno != errno.ENOENT:
+            raise
+        return True
+
 class ParserError(Exception):
     pass
 
@@ -186,6 +194,11 @@ def clean_junk(folder):
 
 def extract(args):
     import zipfile
+
+    if not dir_empty_or_nonexistent(args.output_folder):
+        print('Output folder must be empty', file=sys.stderr)
+        sys.exit(1)
+
     if os.path.isdir(args.input_path):
         copytree_exist(args.input_path, args.output_folder)
     else:

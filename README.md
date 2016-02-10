@@ -55,7 +55,12 @@ python -m pip install d2lmf
 
 ## Dependencies
 The extraction of rar and 7z archives depends on external tools. If you do not
-have those tools installed, those archives will be skipped.
+have a rar or 7z utility installed, those archives will be skipped.
+
+On Windows, I suggest installing [7-Zip](http://www.7-zip.org/).
+On Ubuntu, p7zip is the equivalent, and it can be installed with
+`sudo apt-get install p7zip-full`. p7zip is also available for OSX, and can
+be installed from [homebrew](http://brew.sh/) with `brew install p7zip`.
 
 ## Release Status
 This software is in beta. There may be bugs, and the interface may undergo

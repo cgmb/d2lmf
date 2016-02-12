@@ -192,12 +192,14 @@ def clean_junk(folder):
                     print(e, file=sys.stderr)
                     print('Failed to remove "%s"' % junk, file=sys.stderr)
 
+class ExtractError(Exception):
+    pass
+
 def extract(args):
     import zipfile
 
     if not dir_empty_or_nonexistent(args.output_folder):
-        print('Output folder must be empty', file=sys.stderr)
-        sys.exit(1)
+        raise ExtractError('Output folder must be empty')
 
     if os.path.isdir(args.input_path):
         copytree_exist(args.input_path, args.output_folder)
@@ -275,4 +277,8 @@ def main():
 
     args = parser.parse_args()
     setup_vprint(args)
-    args.func(args)
+    try:
+        args.func(args)
+    except ExtractError as e:
+        print(e.message, file=sys.stderr)
+        sys.exit(1)

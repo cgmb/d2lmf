@@ -280,5 +280,5 @@ def main():
     try:
         args.func(args)
     except ExtractError as e:
-        print(e.message, file=sys.stderr)
+        print(e, file=sys.stderr)
         sys.exit(1)

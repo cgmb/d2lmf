@@ -167,6 +167,7 @@ def collapse_lonely(folder):
                     for f in os.listdir(submitted_file_path):
                         f_path = os.path.join(submitted_file_path, f)
                         shutil.move(f_path, submission_path)
+                    os.rmdir(submitted_file_path)
 
 def clean_junk(folder):
     """

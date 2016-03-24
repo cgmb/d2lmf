@@ -1,5 +1,5 @@
 ## [v0.0.5] | 2016-02-11
-- [[Issue #6]] Supplied better error message on extracting to a non-empty folder
+- [[Issue #6]] Improved error message for extracting to a non-empty folder
 - [[Issue #7]] Fixed extract-nested hanging on conflicts
 - Improved documentation
 

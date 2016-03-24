@@ -265,6 +265,9 @@ def main():
     extract_parser.add_argument('-m','--merge',
             action='store_true',
             help="Merge all of a student's submissions into a single folder.")
+    extract_parser.add_argument('-v','--verbose',
+            action='store_true',
+            help='Display more information about files being changed.')
     extract_parser.set_defaults(func=extract)
 
     foreach_parser = subparsers.add_parser('foreach',
@@ -274,6 +277,9 @@ def main():
             help='The directory that contains student submissions.')
     foreach_parser.add_argument('command',
             help='A program to execute for each submission.')
+    foreach_parser.add_argument('-v','--verbose',
+            action='store_true',
+            help='Display more information about actions being taken.')
     foreach_parser.set_defaults(func=foreach)
 
     args = parser.parse_args()

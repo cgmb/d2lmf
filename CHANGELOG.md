@@ -1,3 +1,7 @@
+## [v0.0.6] | 2016-03-24
+- [[Issue #8]] Collapse directories now deletes the empty leftover directory
+- The verbose flag can now go on subcommands e.g. d2lmf extract -v a.zip out
+
 ## [v0.0.5] | 2016-02-11
 - [[Issue #6]] Improved error message for extracting to a non-empty folder
 - [[Issue #7]] Fixed extract-nested hanging on conflicts
@@ -23,6 +27,7 @@ an already unzipped directory
 - Extract command supports extracting submitted archives with -x, collapsing
 unneccessary directories with -c, and merging submissions with -m
 
+[v0.0.6]: https://github.com/cgmb/d2lmf/compare/v0.0.5...v0.0.6
 [v0.0.5]: https://github.com/cgmb/d2lmf/compare/v0.0.4...v0.0.5
 [v0.0.4]: https://github.com/cgmb/d2lmf/compare/v0.0.3...v0.0.4
 [v0.0.3]: https://github.com/cgmb/d2lmf/compare/v0.0.2...v0.0.3
@@ -31,3 +36,4 @@ unneccessary directories with -c, and merging submissions with -m
 [Issue #3]: https://github.com/cgmb/d2lmf/issues/3
 [Issue #6]: https://github.com/cgmb/d2lmf/issues/6
 [Issue #7]: https://github.com/cgmb/d2lmf/issues/7
+[Issue #8]: https://github.com/cgmb/d2lmf/issues/8

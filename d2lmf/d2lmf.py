@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Cordell Bloor
+# Copyright (C) 2015-2016 Cordell Bloor
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ import errno
 import shutil
 import sys
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 
 def makedirs_exist(path):
     """

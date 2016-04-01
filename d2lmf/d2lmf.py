@@ -93,7 +93,7 @@ def merge(src, dest):
             shutil.move(src_file, dest_root)
     shutil.rmtree(src)
 
-def rename(input_folder):
+def rename(input_folder, seperator):
     """
     Rename all child folders, using their complicated D2L-given name to infer
     the submitter's name. Use the submitter's name to create a short, easy
@@ -112,7 +112,7 @@ def rename(input_folder):
                 id_num, student, timestamp = parse_submission_dirname(name)
                 parsed_timestamp = datetime.strptime(timestamp,
                         '%b %d, %Y %I:%M %p') # Sep 29, 2015 4:17 PM
-                shortname = student.replace(' ', '')
+                shortname = student.replace(' ', seperator)
                 submissions.append((name, shortname, parsed_timestamp))
             except (ParserError,ValueError) as e:
                 print(e, file=sys.stderr)
@@ -215,7 +215,7 @@ def extract(args):
     if args.collapse:
         collapse_lonely(args.output_folder)
     if args.merge:
-        rename(args.output_folder)
+        rename(args.output_folder, args.seperator)
 
 def foreach(args):
     import subprocess
@@ -265,6 +265,8 @@ def main():
     extract_parser.add_argument('-m','--merge',
             action='store_true',
             help="Merge all of a student's submissions into a single folder.")
+    extract_parser.add_argument('-s','--seperator', default='',
+            help="The seperator to replace spaces in the merged folder's name.")
     extract_parser.add_argument('-v','--verbose',
             action='store_true',
             help='Display more information about files being changed.')

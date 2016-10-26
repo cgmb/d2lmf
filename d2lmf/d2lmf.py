@@ -231,6 +231,17 @@ def setup_vprint(args):
     global vprint
     vprint = print if args.verbose else lambda *a, **k: None
 
+
+def expand_aliases(args):
+    """
+    Expands all arguments that are aliases for collections of other arguments.
+    """
+    if args.recommended:
+        args.extract_nested = True
+        args.junk = True
+        args.collapse = True
+        args.merge = True
+
 def main():
     parser = argparse.ArgumentParser(prog='d2lmf',
             description='d2lmf is a suite of tools to help mark assignments '
@@ -249,6 +260,10 @@ def main():
             help='The zip file or unzipped directory to extract data from.')
     extract_parser.add_argument('output_folder',
             help='The folder in which to put extracted data.')
+    extract_parser.add_argument('-R','--recommended',
+            action='store_true',
+            help='Use the recommended extraction settings. This is an alias '
+            'for -xjcm.')
     extract_parser.add_argument('-x','--extract-nested',
             action='store_true',
             help='Uses command-line tools to attempt to extract submitted '
@@ -286,6 +301,7 @@ def main():
 
     args = parser.parse_args()
     setup_vprint(args)
+    expand_aliases(args)
     try:
         args.func(args)
     except ExtractError as e:

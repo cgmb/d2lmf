@@ -1,3 +1,7 @@
+## [v0.0.7] | 2016-12-05
+- Added -R flag to extract command as an alias for all recommended flags
+- Added support in extract for choosing the character that replaces spaces
+
 ## [v0.0.6] | 2016-03-24
 - [[Issue #8]] Collapse directories now deletes the empty leftover directory
 - The verbose flag can now go on subcommands e.g. d2lmf extract -v a.zip out
@@ -27,6 +31,7 @@ an already unzipped directory
 - Extract command supports extracting submitted archives with -x, collapsing
 unneccessary directories with -c, and merging submissions with -m
 
+[v0.0.7]: https://github.com/cgmb/d2lmf/compare/v0.0.6...v0.0.7
 [v0.0.6]: https://github.com/cgmb/d2lmf/compare/v0.0.5...v0.0.6
 [v0.0.5]: https://github.com/cgmb/d2lmf/compare/v0.0.4...v0.0.5
 [v0.0.4]: https://github.com/cgmb/d2lmf/compare/v0.0.3...v0.0.4

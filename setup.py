@@ -20,7 +20,7 @@ setup(
     tests_require = ['nose'],
     test_suite = "nose.collector",
     classifiers = [
-        'Development Status :: 5 - Production/Stable'
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015-2016 Cordell Bloor
+# Copyright (C) 2015-2018 Cordell Bloor
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ import errno
 import shutil
 import sys
 
-__version__ = "0.0.7"
+__version__ = "1.0.0"
 
 def makedirs_exist(path):
     """
@@ -217,13 +217,6 @@ def extract(args):
     if args.merge:
         rename(args.output_folder, args.seperator)
 
-def foreach(args):
-    import subprocess
-    for submission in os.listdir(args.directory):
-        submission_path = os.path.join(args.directory, submission)
-        if os.path.isdir(submission_path):
-            subprocess.call(args.command, cwd=submission_path)
-
 def setup_vprint(args):
     """
     Defines the function vprint, which only prints when --verbose is set
@@ -286,18 +279,6 @@ def main():
             action='store_true',
             help='Display more information about files being changed.')
     extract_parser.set_defaults(func=extract)
-
-    foreach_parser = subparsers.add_parser('foreach',
-            help='Run a given command for each submission, with some context '
-            'information provided in environment variables.')
-    foreach_parser.add_argument('directory',
-            help='The directory that contains student submissions.')
-    foreach_parser.add_argument('command',
-            help='A program to execute for each submission.')
-    foreach_parser.add_argument('-v','--verbose',
-            action='store_true',
-            help='Display more information about actions being taken.')
-    foreach_parser.set_defaults(func=foreach)
 
     args = parser.parse_args()
     setup_vprint(args)

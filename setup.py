@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name = 'd2lmf',
-    version = '0.0.7',
+    version = '1.0.0',
     description = 'A command-line tool to help mark assignments submitted to D2L.',
     license = 'GPLv3+',
     url = 'https://github.com/cgmb/d2lmf',
@@ -20,7 +20,7 @@ setup(
     tests_require = ['nose'],
     test_suite = "nose.collector",
     classifiers = [
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable'
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
@@ -35,6 +35,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Education',
     ],
     long_description = """
@@ -61,20 +62,24 @@ This is the most common command I use:
 
 .. code:: bash
 
-    d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
+    d2lmf extract -R "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
 
-This extracts the submissions from the zip folder into the directory
-``A1/T01``. The ``-x`` specifies that we want to extract any zip, rar,
-tar, or 7z archives that students submitted. The ``-j`` deletes 'junk'
-like ``.DS_Store``. The ``-c`` collapses needlessly nested directories.
+It extracts the submissions from the zip folder into the directory
+``A1/T01``. The ``-R`` option makes it run all the recommended cleanup
+actions on the submissions, and is equivalent to using ``-x``, ``-j``,
+``-c`` and ``-m``.
+
+The ``-x`` specifies that we want to extract any zip, rar, tar, or 7z
+archives that students submitted. The ``-j`` deletes 'junk' like
+``.DS_Store``. The ``-c`` collapses needlessly nested directories.
 Finally, the ``-m`` merges all submitted files into a single directory
-for each student. Cool!
+for each student.
 
 On Windows, you may need to invoke d2lmf as a Python module, like so:
 
 .. code:: bash
 
-    python -m d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
+    python -m d2lmf extract -R "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
 
 How to Install
 --------------
@@ -99,7 +104,7 @@ OSX
 Windows
 ~~~~~~~
 
-First, download and install Python 2.7 from
+First, download and install Python from
 https://www.python.org/downloads/
 
 Then, install d2lmf with the command below:
@@ -120,11 +125,5 @@ Ubuntu, p7zip is the equivalent, and it can be installed with
 ``sudo apt-get install p7zip-full``. p7zip is also available for OSX,
 and can be installed from `homebrew <http://brew.sh/>`__ with
 ``brew install p7zip``.
-
-Release Status
---------------
-
-This software is in beta. There may be bugs, and the interface may
-undergo significant changes between releases.
 """
 )

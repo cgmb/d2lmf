@@ -17,18 +17,21 @@ will too.
 ## How to Use
 This is the most common command I use:
 ```bash
-d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
+d2lmf extract -R "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
 ```
 
-This extracts the submissions from the zip folder into the directory `A1/T01`.
+It extracts the submissions from the zip folder into the directory `A1/T01`.
+The `-R` option makes it run all the recommended cleanup actions on the
+submissions, and is equivalent to using `-x`, `-j`, `-c` and `-m`.
+
 The `-x` specifies that we want to extract any zip, rar, tar, or 7z archives
 that students submitted. The `-j` deletes 'junk' like `.DS_Store`. The `-c`
 collapses needlessly nested directories. Finally, the `-m` merges all submitted
-files into a single directory for each student. Cool!
+files into a single directory for each student.
 
 On Windows, you may need to invoke d2lmf as a Python module, like so:
 ```bash
-python -m d2lmf extract -xjcm "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
+python -m d2lmf extract -R "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
 ```
 
 ## How to Install
@@ -46,7 +49,7 @@ sudo pip install d2lmf
 ```
 
 ### Windows
-First, download and install Python 2.7 from https://www.python.org/downloads/
+First, download and install Python from https://www.python.org/downloads/
 
 Then, install d2lmf with the command below:
 ```bash
@@ -61,7 +64,3 @@ On Windows, I suggest installing [7-Zip](http://www.7-zip.org/).
 On Ubuntu, p7zip is the equivalent, and it can be installed with
 `sudo apt-get install p7zip-full`. p7zip is also available for OSX, and can
 be installed from [homebrew](http://brew.sh/) with `brew install p7zip`.
-
-## Release Status
-This software is in beta. There may be bugs, and the interface may undergo
-significant changes between releases.

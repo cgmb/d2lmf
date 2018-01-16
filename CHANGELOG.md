@@ -1,3 +1,6 @@
+## [v1.0.0] | 2018-01-15
+- Improved documentation
+
 ## [v0.0.7] | 2016-12-05
 - Added -R flag to extract command as an alias for all recommended flags
 - Added support in extract for choosing the character that replaces spaces
@@ -31,6 +34,7 @@ an already unzipped directory
 - Extract command supports extracting submitted archives with -x, collapsing
 unneccessary directories with -c, and merging submissions with -m
 
+[v1.0.0]: https://github.com/cgmb/d2lmf/compare/v0.0.7...v1.0.0
 [v0.0.7]: https://github.com/cgmb/d2lmf/compare/v0.0.6...v0.0.7
 [v0.0.6]: https://github.com/cgmb/d2lmf/compare/v0.0.5...v0.0.6
 [v0.0.5]: https://github.com/cgmb/d2lmf/compare/v0.0.4...v0.0.5

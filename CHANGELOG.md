@@ -1,5 +1,6 @@
 ## [v1.0.0] | 2018-01-15
 - Improved documentation
+- Switched default replacement character to underscore
 
 ## [v0.0.7] | 2016-12-05
 - Added -R flag to extract command as an alias for all recommended flags

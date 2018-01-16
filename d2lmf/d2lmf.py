@@ -273,7 +273,7 @@ def main():
     extract_parser.add_argument('-m','--merge',
             action='store_true',
             help="Merge all of a student's submissions into a single folder.")
-    extract_parser.add_argument('-s','--seperator', default='',
+    extract_parser.add_argument('-s','--seperator', default='_',
             help="The seperator to replace spaces in the merged folder's name.")
     extract_parser.add_argument('-v','--verbose',
             action='store_true',

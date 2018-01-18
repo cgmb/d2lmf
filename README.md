@@ -29,31 +29,35 @@ that students submitted. The `-j` deletes 'junk' like `.DS_Store`. The `-c`
 collapses needlessly nested directories. Finally, the `-m` merges all submitted
 files into a single directory for each student.
 
-On Windows, you may need to invoke d2lmf as a Python module, like so:
+If you haven't added your local Python bin directory to your path, you may need
+to invoke d2lmf as a module, like so:
 ```bash
 python -m d2lmf extract -R "Assignment 1 Download Oct 11, 2015 803 PM.zip" A1/T01
 ```
 
 ## How to Install
+d2lmf is available through [pip](https://docs.python.org/3/installing/index.html).
+If you're running a recent version of Python, you probably already have pip
+installed. If not, that's the first step in each of the commands below.
+
 ### Ubuntu
 ```bash
 sudo apt-get install python-pip
-sudo pip install d2lmf
+pip install --user d2lmf
 ```
 
 ### OSX
 ```bash
-curl https://bootstrap.pypa.io/get-pip.py > get-pip.py
-sudo python get-pip.py
-sudo pip install d2lmf
+sudo easy_install pip
+pip install --user d2lmf
 ```
 
 ### Windows
 First, download and install Python from https://www.python.org/downloads/
 
-Then, install d2lmf with the command below:
+Then, install d2lmf:
 ```bash
-python -m pip install d2lmf
+python -m pip install --user d2lmf
 ```
 
 ## Dependencies

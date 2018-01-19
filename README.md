@@ -44,12 +44,20 @@ installed. If not, that's the first step in each of the commands below.
 ```bash
 sudo apt-get install python-pip
 pip install --user d2lmf
+
+# add the local Python bin directory to the path
+echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.profile
+source ~/.profile
 ```
 
 ### OSX
 ```bash
 sudo easy_install pip
 pip install --user d2lmf
+
+# add the local Python bin directory to the path
+echo 'export PATH="$PATH:$HOME/Library/Python/2.7/bin"' >> ~/.profile
+source ~/.profile
 ```
 
 ### Windows

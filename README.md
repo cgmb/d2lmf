@@ -40,24 +40,19 @@ d2lmf is available through [pip](https://docs.python.org/3/installing/index.html
 If you're running a recent version of Python, you probably already have pip
 installed. If not, that's the first step in each of the commands below.
 
+After installing, you may want to follow [the instructions](docs/path.md) to
+add your local Python bin directory to your PATH.
+
 ### Ubuntu
 ```bash
 sudo apt-get install python-pip
 pip install --user d2lmf
-
-# add the local Python bin directory to the path
-echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.profile
-source ~/.profile
 ```
 
 ### OSX
 ```bash
 sudo easy_install pip
 pip install --user d2lmf
-
-# add the local Python bin directory to the path
-echo 'export PATH="$PATH:$HOME/Library/Python/2.7/bin"' >> ~/.profile
-source ~/.profile
 ```
 
 ### Windows
